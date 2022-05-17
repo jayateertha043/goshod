@@ -10,6 +10,6 @@ builds:
       - arm64
       - arm 
       - 386
-    id: "import_disqus_cli"
+    id: "goshod"
     dir: .
     main: .
