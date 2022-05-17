@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<link>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" />
+<link href="./css/style.css" rel="stylesheet">
+</link>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+        <template>
+          <v-container full-width fluid>
+            <v-card>
+              <v-card-title primary-title>
+                <p class="text-h3 font-weight-bold mx-auto px-auto">GoShoD</p>
+              </v-card-title>
+              <v-divider></v-divider>
+              <v-card-text class="pa-3">
+                <v-container d-flex>
+
+                  <v-text-field label="Shodan Search" name="search" type="text" dense solo v-model="search">
+                  </v-text-field>
+
+                  <v-btn raised color="primary" class="ml-3" @click="shodanHostSearch(search,-1,$event)">Search</v-btn>
+                </v-container>
+              </v-card-text>
+            </v-card>
+
+            <div class="my-3 d-flex flex-row justify-center" v-if="showLoading">
+              <v-progress-circular class="justify-center" indeterminate color="primary"></v-progress-circular>
+            </div>
+
+            <v-card id="card_list" class="my-3" v-if="host_result.matches.length>0">
+              <v-card-text>
+                <v-simple-table>
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th>IP</th>
+                        <th>Product</th>
+                        <th>Version</th>
+                        <th>Port</th>
+                        <th>Organisation</th>
+                        <th>Hostnames</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>Timestamp</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="result in host_result.matches">
+                        
+                          <td><a :href='"https://shodan.io/host/"+result.ip_str' target="_blank" rel="noreferrer noopener">{{result.ip_str}}</a></td>
+                        
+                        <td>{{result.product}}</td>
+                        <td>{{result.version}}</td>
+                        <td>{{result.port}}</td>
+                        <td>{{result.org}}</td>
+                        <td>{{result.hostnames.join(", ")}}</td>
+                        <td>{{result.location.country_name}}</td>
+                        <td>{{result.location.city}}</td>
+                        <td>{{result.timestamp.split(".")[0]}}</td>
+                      </tr>
+                    </tbody>
+
+                  </template>
+                </v-simple-table>
+              </v-card-text>
+            </v-card>
+        </template>
+
+        <template>
+          <div class="my-3 d-flex flex-row justify-center" class="my-3" v-if="host_result.matches.length>0">
+            <v-btn icon x-large @click="prevPage">
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+            <v-btn icon x-large>
+              {{curPage}}
+            </v-btn>
+            <v-btn icon x-large @click="nextPage">
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+          </div>
+
+        </template>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+
+  </script>
+</body>
+
+</html>
