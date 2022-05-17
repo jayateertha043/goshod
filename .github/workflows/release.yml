@@ -1,4 +1,4 @@
-name: Release TBB binaries
+name: Release Go binaries
 
 on:
   release:
