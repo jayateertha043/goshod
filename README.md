@@ -28,7 +28,7 @@ Run GoShoD:
 
 ## USAGE:
 
-<img src="./GoShod.gif"/>
+<img src="./GoShod.gif"/> 
 
 Configure Shodan API:
 
