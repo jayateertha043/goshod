@@ -123,6 +123,8 @@ const app = new Vue({
     },
     nextPage(){
       if(this.curPage<this.maxPage){
+        this.showLoading = true;
+        this.host_result={matches:[]}
         this.curPage++;
         var params = new URLSearchParams();
         params.append("search",this.search);
@@ -153,6 +155,8 @@ const app = new Vue({
     },
     prevPage(){
       if(this.curPage>this.minPage){
+        this.showLoading = true;
+        this.host_result={matches:[]}
         this.curPage--;
         var params = new URLSearchParams();
         params.append("search",this.search);
